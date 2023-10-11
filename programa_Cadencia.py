@@ -1,3 +1,5 @@
+import datetime
+
 ## Intrução de uso
 ## Necessário ter um GDAT para entrada dos dados
 ## No GDAT deve conter os dados a partir do TREL
@@ -11,9 +13,11 @@ print("""
 # Nome do arquivo de entrada e de saída
 arquivo_entrada = input("Nome do arquivo base: ")
 arquivo_saida = input("Nome do arquivo de saida: ")
-data = input("Data xx/xx/xxxx): ")
-arquivo_entrada = arquivo_entrada + ".txt"
-arquivo_saida = arquivo_saida + ".txt"
+veiculo = input("Numero do veiculo: ")
+
+data = datetime.date.today()
+arquivo_entrada = arquivo_entrada
+arquivo_saida = arquivo_saida
 # Verifica a quantidade de linhas do arquivo de entrada
 contador_linhas = 0
 
@@ -24,9 +28,9 @@ cabecalho ="""
 |                                                Relatorio Tempo Real Bruto                                                 |
 |                                                                                                                           |
 |                                                                                                                           |
-|  Resultado: Atlas-CLA                   Operacao:{operacao:<40}       Data: {data}          |
+|  Resultado: Atlas-CLA                   Operacao:{operacao:<40}           Data: {data}      |
 |                                                                                                                           |
-|  Veiculo:   20580                       N.Ensaio:  1                                                             Alvo: 0  |
+|  Veiculo:   {veiculo:<8}                    N.Ensaio:  1                                                             Alvo: 0  |
 |                                                                                                                           |
 +---------------------+------------+---------------------------------------------+--------+-----------------------------+---+
 |                     |            |                                             |        |                             |   |
@@ -38,7 +42,7 @@ cabecalho ="""
 |            |        | | | | | |  |        |        |         | Aq-Ds  | Aq-Ds  |  |  |  |         |         |         |   |
 |hh:mm:ss.zzz|ssss.zzz|E|A|D|R|T|SR|  grau  |  grau  |   Km    |  grau  |  grau  |  |  |  |   Km    |   Km    |   Km    | Ds|
 +------------+--------+-+-+-+-+-+--+--------+--------+---------+--------+--------+--+--+--+---------+---------+---------+---+
-""".format(operacao = arquivo_saida, data= data)
+""".format(operacao = arquivo_saida.strip(".txt"),veiculo=veiculo, data= data.strftime("%d/%m/%Y")).lstrip()
 
 
 # Inicializa uma lista vazia para armazenar as linhas a serem impressas
